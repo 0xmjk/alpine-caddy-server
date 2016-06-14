@@ -14,11 +14,12 @@ RUN mkdir /hugo && \
     rm -rf /hugo/hugo_${HUGO_RELEASE}_linux_amd64
 RUN apk add --no-cache su-exec git libcap
 RUN /usr/sbin/setcap cap_net_bind_service=+ep /caddy/caddy
-RUN mkdir /srv/www && \
-    mkdir /srv/git && \
+RUN mkdir /srv && \
     mkdir /.caddy && \
-    chown nobody:nobody /srv/www /srv/git /.caddy
+    chown nobody:nobody /srv /.caddy
 ADD start.sh /
 VOLUME /etc/caddy
+VOLUME /.caddy
+VOLUME /srv
 ENTRYPOINT ["/start.sh"]
 
