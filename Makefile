@@ -1,4 +1,4 @@
-IMAGE=0xmjk/caddy-git-hugo-mailout
+IMAGE=0xmjk/alpine-caddy-server
 
 image:
 	docker build -t $(IMAGE) .
