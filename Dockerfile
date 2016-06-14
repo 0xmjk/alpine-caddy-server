@@ -17,6 +17,7 @@ RUN /usr/sbin/setcap cap_net_bind_service=+ep /caddy/caddy
 RUN mkdir /.caddy && \
     mkdir /.ssh && \
     chown nobody:nobody /srv /.caddy /.ssh
+RUN echo StrictHostKeyChecking no >> /etc/ssh/ssh_config
 ADD start.sh /
 VOLUME /etc/caddy
 VOLUME /.caddy
