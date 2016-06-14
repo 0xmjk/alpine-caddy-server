@@ -13,8 +13,10 @@ RUN mkdir /hugo && \
     mv /hugo/hugo_${HUGO_RELEASE}_linux_amd64/hugo_${HUGO_RELEASE}_linux_amd64 /hugo/hugo && \
     rm -rf /hugo/hugo_${HUGO_RELEASE}_linux_amd64
 RUN apk add --no-cache su-exec git 
-RUN mkdir /srv/{www,git} && \
-    chown nobody:nobody /srv/{www,git}
+RUN mkdir /srv/www && \
+    mkdir /srv/git && \
+    mkdir /.caddy && \
+    chown nobody:nobody /srv/www /srv/git /.caddy
 ADD start.sh /
 VOLUME /etc/caddy
 ENTRYPOINT ["/start.sh"]
