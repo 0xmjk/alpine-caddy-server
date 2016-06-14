@@ -20,5 +20,7 @@ ADD start.sh /
 VOLUME /etc/caddy
 VOLUME /.caddy
 VOLUME /srv
+EXPOSE 443
+EXPOSE 80
 ENTRYPOINT ["/start.sh"]
 
