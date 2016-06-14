@@ -1,6 +1,8 @@
 FROM alpine:3.4
-ARG HUGO_RELEASE=0.15
-ARG FEATURES=git,hugo,mailout
+ARG HUGO_RELEASE
+ENV HUGO_RELEASE ${HUGO_RELEASE:-0.15}
+ARG FEATURES
+ENV FEATURES ${FEATURES:-git,hugo,mailout}
 ADD https://caddyserver.com/download/build?os=linux&arch=amd64&features=${FEATURES} /caddy.tar.gz
 RUN mkdir /caddy && \
     tar -zxvf /caddy.tar.gz -C /caddy 
