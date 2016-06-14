@@ -12,10 +12,11 @@ RUN mkdir /hugo && \
     mv /hugo/hugo_${HUGO_RELEASE}_linux_amd64/LICENSE.md /hugo/ && \
     mv /hugo/hugo_${HUGO_RELEASE}_linux_amd64/hugo_${HUGO_RELEASE}_linux_amd64 /hugo/hugo && \
     rm -rf /hugo/hugo_${HUGO_RELEASE}_linux_amd64
-RUN apk add --no-cache su-exec git libcap
+RUN apk add --no-cache su-exec git libcap openssh
 RUN /usr/sbin/setcap cap_net_bind_service=+ep /caddy/caddy
 RUN mkdir /.caddy && \
-    chown nobody:nobody /srv /.caddy
+    mkdir /.ssh && \
+    chown nobody:nobody /srv /.caddy /.ssh
 ADD start.sh /
 VOLUME /etc/caddy
 VOLUME /.caddy
