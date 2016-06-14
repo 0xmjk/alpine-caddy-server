@@ -12,7 +12,8 @@ RUN mkdir /hugo && \
     mv /hugo/hugo_${HUGO_RELEASE}_linux_amd64/LICENSE.md /hugo/ && \
     mv /hugo/hugo_${HUGO_RELEASE}_linux_amd64/hugo_${HUGO_RELEASE}_linux_amd64 /hugo/hugo && \
     rm -rf /hugo/hugo_${HUGO_RELEASE}_linux_amd64
-RUN apk add --no-cache su-exec git 
+RUN apk add --no-cache su-exec git libcap
+RUN /usr/sbin/setcap cap_net_bind_service=+ep /caddy/caddy
 RUN mkdir /srv/www && \
     mkdir /srv/git && \
     mkdir /.caddy && \
