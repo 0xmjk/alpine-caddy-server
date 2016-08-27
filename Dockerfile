@@ -6,12 +6,9 @@ ENV FEATURES ${FEATURES:-git,hugo,mailout}
 ADD https://caddyserver.com/download/build?os=linux&arch=amd64&features=${FEATURES} /caddy.tar.gz
 RUN mkdir /caddy && \
     tar -zxvf /caddy.tar.gz -C /caddy 
-ADD https://github.com/spf13/hugo/releases/download/v${HUGO_RELEASE}/hugo_${HUGO_RELEASE}_linux_amd64.tar.gz /
+ADD https://github.com/spf13/hugo/releases/download/v${HUGO_RELEASE}/hugo_${HUGO_RELEASE}_linux-64bit.tgz /
 RUN mkdir /hugo && \
-    tar -zxvf /hugo_${HUGO_RELEASE}_linux_amd64.tar.gz -C /hugo hugo_${HUGO_RELEASE}_linux_amd64/LICENSE.md hugo_${HUGO_RELEASE}_linux_amd64/hugo_${HUGO_RELEASE}_linux_amd64 && \
-    mv /hugo/hugo_${HUGO_RELEASE}_linux_amd64/LICENSE.md /hugo/ && \
-    mv /hugo/hugo_${HUGO_RELEASE}_linux_amd64/hugo_${HUGO_RELEASE}_linux_amd64 /hugo/hugo && \
-    rm -rf /hugo/hugo_${HUGO_RELEASE}_linux_amd64
+    tar -zxvf /hugo_${HUGO_RELEASE}_linux-64bit.tgz -C /hugo
 RUN apk add --no-cache su-exec git libcap openssh
 RUN /usr/sbin/setcap cap_net_bind_service=+ep /caddy/caddy
 RUN mkdir /.caddy && \
